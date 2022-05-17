@@ -1,0 +1,75 @@
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="text-center register-login form-group">
+
+              <form [formGroup]="userForm">
+                  <span class="form-logo">
+                      <img class="logo" src="assets/airplane.ico" width="80px" height="80px">                
+                  </span>
+                  <span class="form-title text-bold heading-color">Sign Up</span>
+
+                  <div class="mb-3 form-group InputWithIcon required">
+                    <input type="text" formControlName="userFirstName"  class="form-control wrap-input" placeholder="User Name">
+                     <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>                    
+                    <label class="text-danger" *ngIf="userForm.get('userFirstName').errors?.['required']">*mandatory</label> 
+                  </div>
+                  
+
+                   <!-- <div class="mb-3" >
+                    <div class="form-check"><input hidden formControlName="IsAdmin" type="checkbox" [checked]="true" class="form-check-input"  id="flexCheckChecked" />
+                      <label class="form-check-label" for="flexCheckChecked"></label></div>
+                  </div>  -->
+                
+                  <!-- <div class="mb-3 InputWithIcon">
+                    <label  class="form-label">Gender</label><br>
+                    <select name="form-control" formControlName="Gender" >
+                      <option value="">Select Gender</option>
+                      <option *ngFor="let val of gender" [value]="val">{{val}}</option>
+                    </select>
+                    
+                  </div> -->
+                  <div class="mb-3 InputWithIcon">
+                    <!-- <label  class="form-label">Email</label> -->
+                    <input formControlName="UserEmailid" type="email" class="form-control wrap-input" placeholder="Email Id" aria-describedby="emailHelp">
+                    <i class="fa fa-envelope fa-lg fa-fw" aria-hidden="true"></i>
+                    <label class="text-danger" *ngIf="userForm.get('UserEmailid').errors?.['required'] && userForm.get('UserEmailid').touched">*mandatory</label>
+                    <label class="text-danger" *ngIf="userForm.get('UserEmailid').touched && userForm.get('UserEmailid').errors?.['email']">Invalid email address.</label>
+
+                  </div>
+                  <div formGroupName="Passwords">
+                    <div class="mb-3 InputWithIcon">
+                      <!-- <label  class="form-label">password</label> -->
+                      <input formControlName="UserPassword" type="password" class="form-control wrap-input" aria-describedby="emailHelp" placeholder="Password">
+                      <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"></i>
+                      <label class="text-danger" *ngIf="userForm.get('Passwords.UserPassword').touched && userForm.get('Passwords.UserPassword').errors?.['required']">*mandatory</label>
+                      <label class="text-danger" *ngIf="userForm.get('Passwords.UserPassword').touched && userForm.get('Passwords.UserPassword').errors?.['minlength']">Need atleast 5 characters.</label>
+                    </div>
+                    <div class="mb-3 InputWithIcon">
+                      <!-- <label  class="form-label">Confirm Password</label> -->
+                      <input formControlName="ConfirmPassword" type="password" class="form-control wrap-input" aria-describedby="emailHelp" placeholder="Confirm Password">
+                      <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"></i>
+                      <label class="text-danger" *ngIf="userForm.get('Passwords.ConfirmPassword').touched && userForm.get('Passwords.ConfirmPassword').errors?.['required']">*mandatory</label>
+                      <label class="text-danger" *ngIf="userForm.get('Passwords.ConfirmPassword').touched && userForm.get('Passwords.ConfirmPassword').errors?.['passwordMismatch']">Password does not match.</label>
+                    </div>
+                  </div>
+
+                  <div class="container-form-btn">
+                      <!-- <button type="submit" class="form-btn btn btn-primary mb-2" (click)="addUser()" [disabled]="!userForm.valid">Sign Up</button> -->
+                      <button type="submit" class="form-btn btn btn-primary mb-2" (click)="addUser()" [disabled]="!userForm.valid" >Sign Up</button>
+
+                  </div>
+                  
+              </form>
+              <a class="txt1 text-right" style="color:#fff;" routerLink="/login">Already Registered? Click to Login!!</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+

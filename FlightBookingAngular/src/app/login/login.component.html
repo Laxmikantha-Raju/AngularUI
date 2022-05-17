@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="text-center register-login form-group">
+
+        <form [formGroup]="loginForm">
+
+          <span class="form-logo">
+            <img class="logo" src="assets/airplane.ico" width="80px" height="80px">
+          </span>
+          <span class="form-title text-bold heading-color">Sign In</span>
+
+          <div class="mb-3 InputWithIcon">
+            <!-- <label for="exampleInputEmail1" class="form-label">User Name</label> -->
+            <input type="text" class="form-control wrap-input" formControlName="UserEmailid" placeholder="User Email">
+            <i class="fa fa-user fa-lg fa-fw" aria-hidden="true"></i>
+
+          </div>
+          <div class="mb-3 InputWithIcon">
+            <!-- <label for="exampleInputPassword1" class="form-label">Password</label> -->
+            <input type="text" class="form-control wrap-input" formControlName="UserPassword" placeholder="Password">
+            <i class="fa fa-key fa-lg fa-fw" aria-hidden="true"></i>
+          </div>
+
+          <div class="login-form-checkbox">
+            <input class="input-checkbox" value="yes" id="ckb1" type="checkbox" name="remember-me">
+            <label class="label-checkbox" style="text-align: left; padding-left: 25px;" for="ckb1">Remember me</label>
+          </div>
+
+          <div class="container-form-btn">
+            <button type="submit" class="form-btn btn btn-primary" (click)="UserLogin()">Sign In</button>
+          </div>
+
+          <div class="text-right row">
+            <div class="col">
+              <a class="col" style="color:#fff; margin-top:10px;" href="#">Forgot Password?</a>
+            </div>
+            <div class="col">
+              <a class="col" style="color:#fff; margin-top:10px; text-align: left;" routerLink="/signup">New User? Sign
+                Up</a>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
