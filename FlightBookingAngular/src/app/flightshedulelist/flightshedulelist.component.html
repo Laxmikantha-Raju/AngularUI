@@ -1,0 +1,81 @@
+
+
+<!-- /*         ADD FLIGHT POP-UP        */ -->
+
+<h1 mat-dialog-title>Add Flight</h1>
+<div class="mat-dialog-content">
+  <form [formGroup]="flightForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Flight Id</mat-label>
+        <input formControlName="airlineId" matInput placeholder="Placeholder">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>From Place</mat-label>
+        <input formControlName="fromPlace" matInput placeholder="Placeholder">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>To Place</mat-label>
+        <input formControlName="toPlace" matInput placeholder="Placeholder">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Meal Type</mat-label>
+        <input formControlName="mealType" matInput placeholder="Placeholder">
+      </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Flight type</mat-label>
+    <mat-select formControlName="instrumentUsed" placeholder="select">
+        <mat-option value="A109">A109</mat-option>
+        <mat-option value="A122">A122</mat-option>
+        <mat-option value="A110">A110</mat-option>
+        <mat-option value="A109">BR56</mat-option>
+        <mat-option value="A122">D432</mat-option>
+        <mat-option value="A110">B423</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline">
+    <mat-label>Shedule Day</mat-label>
+    <input formControlName="sheduledDay" matInput placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Start Date</mat-label>
+    <input #datep formControlName="startDateTime" matInput [matDatepicker]="picker1">
+    <mat-hint>YYYY/MM/DD</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field><br>
+
+  <mat-form-field appearance="fill">
+    <mat-label>End Date</mat-label>
+    <input formControlName="endDateTime" matInput [matDatepicker]="picker2">
+    <mat-hint>YYYY/MM/DD</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field><br>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>BusinessClass ticket</mat-label>
+    <input formControlName="totalBCSeats" matInput type="number"  class="example-right-align" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Non-businessClass ticket</mat-label>
+    <input formControlName="totalNBCSeats" matInput type="number"  class="example-right-align" placeholder="Placeholder">
+  </mat-form-field>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>B-Ticket Cost</mat-label>
+    <input formControlName="bcTicketCost" matInput type="number" class="example-right-align" placeholder="0">
+    <span matPrefix>&#8377;&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+  <mat-form-field appearance="fill" floatLabel="always">
+    <mat-label>NB-Ticket Cost</mat-label>
+    <input formControlName="nBcTicketCost" matInput type="number" class="example-right-align" placeholder="0">
+    <span matPrefix>&#8377;&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+    <div mat-dialog-action [align]="'end'">
+        <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+        <button mat-raised-button style="margin-left: 8px;" color="primary" (click)="addFlight()" >{{actionBtn}}</button>
+    </div>
+
+</form>
+</div> 

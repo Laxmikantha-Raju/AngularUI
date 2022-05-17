@@ -1,0 +1,33 @@
+mat-form-field{
+    width: 100%;
+}
+
+/* radio */
+
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+    align-items: flex-start;
+  }
+  
+  .example-radio-button {
+    margin: 5px;
+  }
+
+  /*cost*/
+
+  
+.example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+    
+  }

@@ -1,1 +1,27 @@
-<p>user-home works!</p>
+<div class="container1" style="font-family: sans-serif;">  
+  
+    <nav class="flex">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/home">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <li><a href="/addbooking">Book Flight</a></li>
+                <li><a href="/bookingHistory">Booking History</a></li>
+                <li><a href="/viewAirlines">View Flights</a></li>
+              </ul>
+          </li>
+          <li><a href="/bookingHistory">Booking History</a></li>
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+    </div>

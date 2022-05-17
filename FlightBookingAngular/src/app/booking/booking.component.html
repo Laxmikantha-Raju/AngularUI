@@ -1,0 +1,145 @@
+
+<div class="container1" style="font-family: sans-serif;">  
+  
+    <nav class="flex" *ngIf="isAdmin()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/homes">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/homes">Home</a></li>
+          <li><a>Airlines<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <li><a href="/viewAirlines">View Airlines</a></li>
+                  <li><a href="/viewAirlines">Add Airline</a></li>
+              </ul>
+          </li>
+          <li><a href="/manageAirline">Manage Airlines</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="/addbooking">Book Flight</a></li>
+              <li><a href="/bookingHistory">Booking History</a></li>
+              <li><a href="/viewAirlines">View Flights</a></li>
+            </ul>
+        </li>
+        <li><a href="/bookingHistory">Booking History</a></li>
+          <!-- <li><a>Discounts<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Add Discounts</a></li>
+            </ul>
+          </li>
+           -->
+  
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+  
+    <nav class="flex" *ngIf="isUser()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/home">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <!-- <li><a href="#">Search Flights</a></li> -->
+                <li><a href="/addbooking">Book Flight</a></li>
+                <li><a href="/bookingHistory">Booking History</a></li>
+                <li><a href="/viewAirlines">View Flights</a></li>
+              </ul>
+          </li>
+          <!-- <li><a>Search Booking<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Search by PNR</a></li>
+              <li><a href="#">Search by Email</a></li>
+            </ul>
+        </li> -->
+          <li><a href="/bookingHistory">Booking History</a></li>
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+    
+  <br><br>
+    <div class="container"><br>
+      <h4 style="text-align: center;"><strong>Booking History</strong></h4><br>
+  
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="search" #input>
+      </mat-form-field>
+      
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+      
+          <!-- ID Column -->
+          <ng-container matColumnDef="PNR">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PNR </th>
+            <td mat-cell *matCellDef="let row"> {{row.PNR}} </td>
+          </ng-container>
+      
+          <!-- Progress Column -->
+          <ng-container matColumnDef="FlightId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Flight Id </th>
+            <td mat-cell *matCellDef="let row"> {{row.FlightId}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="JourneyType">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Journey Type </th>
+            <td mat-cell *matCellDef="let row"> {{row.JourneyType}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="EmailId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email </th>
+            <td mat-cell *matCellDef="let row"> {{row.EmailId}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="NoOfSeats">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Seats </th>
+            <td mat-cell *matCellDef="let row"> {{row.NoOfSeats}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="TotalCost">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Cost </th>
+            <td mat-cell *matCellDef="let row"> {{row.TotalCost}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="BookingStatus">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> BookingStatus </th>
+            <td mat-cell *matCellDef="let row"> {{row.BookingStatus}} </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-raised-button class="form-btn btn btn-primary-logout text-bold" (click)="cancelTicket(row.Id)" color="warn">Cancel Ticket</button>
+            </td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </div>
+    </div>
+  </div>
+  

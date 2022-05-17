@@ -21,7 +21,7 @@ export class RegisterUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
-      userFirstName:['',Validators.required],
+      UserFirstName:['',Validators.required],
       UserEmailid:['',[Validators.required,Validators.email]],
       Passwords : this.fb.group({
         UserPassword:['',[Validators.required,Validators.minLength(5)]],
@@ -52,10 +52,10 @@ export class RegisterUserComponent implements OnInit {
   addUser(){
     
     var body = {
-      userFirstName: this.userForm.value.userFirstName,
-      UserEmailid: this.userForm.value.UserEmailid,
-      UserIsAdmin: 'N',
-      UserPassword: this.userForm.value.Passwords.UserPassword
+      userFirstName: this.userForm.value.UserFirstName,
+      userEmailid: this.userForm.value.UserEmailid,
+      userIsAdmin: 'N',
+      userPassword: this.userForm.value.Passwords.UserPassword
    }
     //console.log(body);
     

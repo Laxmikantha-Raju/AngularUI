@@ -1,0 +1,183 @@
+<div class="container1" style="font-family: sans-serif;">  
+  
+    <nav class="flex" *ngIf="isAdmin()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/homes">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/homes">Home</a></li>
+          <li><a>Airlines<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <li><a href="/viewAirlines">View Airlines</a></li>
+                  <li><a href="/viewAirlines">Add Airline</a></li>
+              </ul>
+          </li>
+          <li><a href="/manageAirline">Manage Airlines</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="/addbooking">Book Flight</a></li>
+              <li><a href="/bookingHistory">Booking History</a></li>
+              <li><a href="/viewAirlines">View Flights</a></li>
+            </ul>
+        </li>
+        <li><a href="/bookingHistory">Booking History</a></li>
+          <!-- <li><a>Discounts<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Add Discounts</a></li>
+            </ul>
+          </li>
+           -->
+  
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+  
+    <nav class="flex" *ngIf="isUser()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/home">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <!-- <li><a href="#">Search Flights</a></li> -->
+                <li><a href="/addbooking">Book Flight</a></li>
+                <li><a href="/bookingHistory">Booking History</a></li>
+                <li><a href="/viewAirlines">View Flights</a></li>
+              </ul>
+          </li>
+          <!-- <li><a>Search Booking<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Search by PNR</a></li>
+              <li><a href="#">Search by Email</a></li>
+            </ul>
+        </li> -->
+          <li><a href="/bookingHistory">Booking History</a></li>
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+    
+  
+    <form [formGroup]="bookForm" (ngSubmit)='submit()'>
+      <div class="container">
+        <div style="align-content: center;">
+          <br>
+          <label><h4><b>Enter details to book the tickets</b></h4></label>
+        </div>
+        <div class="row" id="parent">
+          <div class="col" style="text-align: left;">
+            <!-- <button type="button" class="btn btn-primary" (click)="backToShedule()">Back</button> -->
+            <br>
+            <!-- <div>
+              <label class="text-label">No of Seats</label>
+              <input type="number" class="form-control wrap-input" formControlName="NoOfSeats">
+              
+            </div> -->
+                    <div class="form-group">
+                      <label class="text-label" style="font-family: Poppins-Regular;">No of Seats </label>
+                      <input style="width:200px;" type="number" formControlName="NoOfSeats">
+                    </div>
+                    <br><br>
+  
+                    <div class="form-group">
+                      <label class="text-label">Class Type <span>&nbsp;&nbsp;</span></label>
+                      <select style="width:200px;" name="form-control" formControlName="ClassType" >
+                        <option value="">Select Class </option>
+                        <option *ngFor="let val of classtype" [value]="val">{{val}}</option>
+                      </select>      
+                    </div>
+  
+                    <!-- <div class="form-group">
+                      <label>Class Type <span>&nbsp;&nbsp;</span></label>
+                      <select style="width:200px;" name="form-control" formControlName="ClassType" >
+                        <option value="">Select Class </option>
+                        <option *ngFor="let val of classtype" [value]="val">{{val}}</option>
+                      </select>      
+                    </div> -->
+                    <br><br>
+  
+                    <div class="form-group">
+                      <label class="text-label">Discount Coupon <span>&nbsp;&nbsp;</span></label>
+                      <select style="width:200px;" name="form-control" formControlName="DiscountId" >
+                        <option value="">Select Discount Coupon </option>
+                        <option *ngFor="let val of discount" [value]="val.id">{{val.discountCode}}</option>
+                      </select>      
+                    </div>
+                    <br><br>
+  
+                    <div class="form-group">
+                    <input type="radio" formControlName="JourneyType" name="JourneyType" 
+                    (click)="removeReturnDate()" value="One way">
+                          <label class="text-label"><span>&nbsp;&nbsp;</span>One way</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                          <input type="radio" formControlName="JourneyType" name="JourneyType" 
+                          (click)="addReturnDate()" value="Round Trip">
+                          <label><span>&nbsp;&nbsp;</span>Round Trip</label>
+                    </div>
+                    <br><br>
+  
+                    <div class="form-group">
+                      <label class="text-label">Return date <span>&nbsp;&nbsp;</span></label>
+                      <input style="display:none;" id="date" type="date" width=300px formControlName="ReturnDate">
+                    </div>
+  
+                    <div class="container-form-btn" style="align-content: center;">
+                      <button type="submit" class="form-btn btn btn-primary-submit text-bold">Submit</button>
+                    </div>
+          </div>
+  
+          <div class="col" style="text-align: left;">
+                        <ng-container formArrayName="PassengerList">
+                          <div class="container-form-btn">
+                            <button type="button" class="block form-btn btn btn-primary-submit text-bold"(click)="addPass()">Add Passenger</button>
+                          </div>
+                          <br>
+                        <div class="card box">
+                          <ng-container *ngFor="let form of pass.controls; let i=index">
+                            <label><b>Passenger details - {{i+1}}</b></label>
+                            <hr>
+                            <div [formGroup]="getFormGroup(form)">
+                              <label>Name</label>
+                              <input  type="text" class="form-control" formControlName="PassengerName"/>
+                              <label>Age</label>
+                              <input  type="number" class="form-control" formControlName="Age"/>
+                              <label  class="form-label">Gender</label><br>
+                              <select class="form-control" formControlName="Gender" >
+                                <option value="">Select Gender</option>
+                                <option *ngFor="let f of gender" [value]="f">{{f}}</option>
+                              </select> 
+                              <label>Seat No</label>
+                              <input  type="number" class="form-control" formControlName="SeatNo"/>
+                            </div>
+                            <br>
+                            <div class="container-form-btn">
+                              <button type="button" class="block1 form-btn btn btn-primary-logout text-bold" (click)="removePass(i)">Delete</button>
+                            </div>
+                            <hr>
+                          </ng-container>
+                        </div>
+                        </ng-container>
+                        <br><br>
+          </div> 
+        </div>
+      </div>
+      <!-- <div class="container-form-btn" style="align-content: center;">
+        <button type="submit" class="form-btn btn btn-primary-submit text-bold">Submit</button>
+      </div> -->
+    </form>
+  
+  </div>
+  

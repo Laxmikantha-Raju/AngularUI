@@ -1,0 +1,197 @@
+<div class="container1" style="font-family: sans-serif;">  
+  
+    <nav class="flex" *ngIf="isAdmin()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/homes">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/homes">Home</a></li>
+          <li><a>Airlines<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <!-- <li><a href="/searchAirline">Search Airlines</a></li> -->
+                <li><a href="/viewAirlines">View Airlines</a></li>
+                  <li><a href="/viewAirlines">Add Airline</a></li>
+              </ul>
+          </li>
+          <li><a href="/manageAirline">Manage Airlines</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <li><a href="/addbooking">Book Flight</a></li>
+                <li><a href="/bookingHistory">Booking History</a></li>
+                <li><a href="/viewAirlines">View Flights</a></li>
+              </ul>
+          </li>
+          <li><a href="/bookingHistory">Booking History</a></li>
+  
+          <!-- <li><a>Discounts<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Add Discounts</a></li>
+            </ul>
+          </li>
+          -->
+  
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-back text-bold" *ngIf="isAdmin()" (click)="openDialog()">Add Flights</button>  
+      <span>&nbsp;&nbsp;</span>
+      <button class="form-btn btn btn-primary-back text-bold" *ngIf="isUser()" (click)="openBooking()">Booking History</button>
+      <span>&nbsp;&nbsp;</span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+  
+    <nav class="flex" *ngIf="isUser()">  
+      <img class="form-logo" src="assets/airplane.ico" width="45px" height="45px" style="align-content: left; margin-left: 5px; margin-top: 2px;" routerLink="/home">   
+      <span class="logoname" style="text-align: left; margin-left: 5px;">Flight Booking</span>
+        
+      <div class="logo">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a>Flight Booking<i class="fas fa-caret-down"></i></a>
+              <ul>
+                <!-- <li><a href="#">Search Flights</a></li> -->
+                <li><a href="/addbooking">Book Flight</a></li>
+                <li><a href="/bookingHistory">Booking History</a></li>
+                <li><a href="/viewAirlines">View Flights</a></li>
+              </ul>
+          </li>
+          <!-- <li><a>Search Booking<i class="fas fa-caret-down"></i></a>
+            <ul>
+              <li><a href="#">Search by PNR</a></li>
+              <li><a href="#">Search by Email</a></li>
+            </ul>
+        </li> -->
+          <li><a href="/bookingHistory">Booking History</a></li>
+          <li><a href="/contacts">Contacts</a></li>
+  
+            <!-- <span class="example-spacer"></span> -->
+            
+        </ul>
+      </div>
+      <span class="example-spacer"></span>
+      <button class="form-btn btn btn-primary-logout text-bold" (click)="logOut()">Log Out</button>
+    </nav>
+  
+    <div class="container"><br>
+      <h4 style="text-align: center;"><strong>Flight Schedule</strong></h4>
+        <mat-form-field appearance="standard">
+          <mat-label>Filter</mat-label>
+          <input matInput  (keyup)="applyFilter($event)" placeholder="Ex. John" #input>
+        </mat-form-field>
+        
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource" matSort>
+        
+            <!-- ID Column -->
+           
+  
+            <!-- <ng-container matColumnDef="airlineId">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> <b>Flight Name</b>  </th>
+              <td mat-cell *matCellDef="let row"> {{row.airlineId}} </td>
+  
+              <select style="width:200px;" name="form-control" formControlName="ClassType" >
+                <option value="">Select Class </option>
+                <option *ngFor="let val of discount" [value]="val.id">{{val.discountCode}}</option>
+              </select>  
+            </ng-container> -->
+  
+            <ng-container matColumnDef="airlineId">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Flight Id  </th>
+              <td mat-cell *matCellDef="let row"> {{row.airlineId}} </td>
+            </ng-container>
+        
+            <!-- Progress Column -->
+            <ng-container matColumnDef="fromPlace">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> From Place </th>
+              <td mat-cell *matCellDef="let row"> {{row.fromPlace}} </td>
+            </ng-container>
+        
+            <!-- Name Column -->
+            <ng-container matColumnDef="toPlace">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>To Place </th>
+              <td mat-cell *matCellDef="let row"> {{row.toPlace}} </td>
+            </ng-container>
+        
+            <!-- Fruit Column -->
+            <ng-container matColumnDef="startDateTime">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>Start Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.startDateTime|date}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="endDateTime">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>End Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.endDateTime|date}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="sheduledDay">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Sheduled Day </th>
+              <td mat-cell *matCellDef="let row"> {{row.sheduledDay}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="instrumentUsed">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Instrument Type </th>
+              <td mat-cell *matCellDef="let row"> {{row.instrumentUsed}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="totalBCSeats">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>BC Seats </th>
+              <td mat-cell *matCellDef="let row"> {{row.totalBCSeats}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="totalNBCSeats">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> N-BC Seats </th>
+              <td mat-cell *matCellDef="let row"> {{row.totalNBCSeats}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="bcTicketCost">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> B-Ticket Cost </th>
+              <td mat-cell *matCellDef="let row"> {{row.bcTicketCost| currency}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="nBcTicketCost">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> NB-Ticket Cost </th>
+              <td mat-cell *matCellDef="let row"> {{row.nBcTicketCost| currency}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="mealType">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Meal Type </th>
+              <td mat-cell *matCellDef="let row"> {{row.mealType}} </td>
+            </ng-container>
+  
+            <ng-container  matColumnDef="action">
+              <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
+              <td mat-cell *matCellDef="let row">
+                
+              <button mat-icon-button *ngIf="isAdmin()" (click)="editFlight(row)" color="primary">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="isAdmin()" (click)="deleteFlight(row.id)" color="warn">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="isUser()" (click)="addBooking(row.id)" color="warn">
+                <mat-icon>add_circle</mat-icon>
+              </button>
+            
+              </td>
+            </ng-container>
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+        
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+    </div>
+  
+  </div>
+  
