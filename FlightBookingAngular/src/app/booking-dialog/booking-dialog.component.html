@@ -89,15 +89,22 @@
             </div> -->
                     <div class="form-group">
                       <label class="text-label" style="font-family: Poppins-Regular;">No of Seats </label>
-                      <input style="width:200px;" type="number" formControlName="NoOfSeats">
+                      <input style="width:200px;" type="number" formControlName="bookingNoOfSeatBook">
                     </div>
                     <br><br>
   
                     <div class="form-group">
-                      <label class="text-label">Class Type <span>&nbsp;&nbsp;</span></label>
-                      <select style="width:200px;" name="form-control" formControlName="ClassType" >
+                      <label class="text-label" style="font-family: Poppins-Regular;">Flight Id </label>
+                      <input style="width:200px;" type="text" formControlName="bookingFlightNumber">
+                    </div>
+
+                    <br><br>
+                    
+                    <div class="form-group">
+                      <label class="text-label">Meal Type <span>&nbsp;&nbsp;</span></label>
+                      <select style="width:200px;" name="form-control" formControlName="BookingMeal" >
                         <option value="">Select Class </option>
-                        <option *ngFor="let val of classtype" [value]="val">{{val}}</option>
+                        <option *ngFor="let val of mealtype" [value]="val">{{val}}</option>
                       </select>      
                     </div>
   
@@ -110,29 +117,29 @@
                     </div> -->
                     <br><br>
   
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="text-label">Discount Coupon <span>&nbsp;&nbsp;</span></label>
                       <select style="width:200px;" name="form-control" formControlName="DiscountId" >
                         <option value="">Select Discount Coupon </option>
                         <option *ngFor="let val of discount" [value]="val.id">{{val.discountCode}}</option>
                       </select>      
                     </div>
-                    <br><br>
+                    <br><br> -->
   
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                     <input type="radio" formControlName="JourneyType" name="JourneyType" 
-                    (click)="removeReturnDate()" value="One way">
+                     value="One way">
                           <label class="text-label"><span>&nbsp;&nbsp;</span>One way</label><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                           <input type="radio" formControlName="JourneyType" name="JourneyType" 
                           (click)="addReturnDate()" value="Round Trip">
                           <label><span>&nbsp;&nbsp;</span>Round Trip</label>
-                    </div>
+                    </div> -->
                     <br><br>
   
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label class="text-label">Return date <span>&nbsp;&nbsp;</span></label>
                       <input style="display:none;" id="date" type="date" width=300px formControlName="ReturnDate">
-                    </div>
+                    </div> -->
   
                     <div class="container-form-btn" style="align-content: center;">
                       <button type="submit" class="form-btn btn btn-primary-submit text-bold">Submit</button>
@@ -140,7 +147,7 @@
           </div>
   
           <div class="col" style="text-align: left;">
-                        <ng-container formArrayName="PassengerList">
+                        <ng-container formArrayName="tblPassengers">
                           <div class="container-form-btn">
                             <button type="button" class="block form-btn btn btn-primary-submit text-bold"(click)="addPass()">Add Passenger</button>
                           </div>
@@ -153,14 +160,15 @@
                               <label>Name</label>
                               <input  type="text" class="form-control" formControlName="PassengerName"/>
                               <label>Age</label>
-                              <input  type="number" class="form-control" formControlName="Age"/>
+                              <input  type="number" class="form-control" formControlName="passengerAge"/>
                               <label  class="form-label">Gender</label><br>
-                              <select class="form-control" formControlName="Gender" >
+                              <select class="form-control" formControlName="passengerGender" >
                                 <option value="">Select Gender</option>
                                 <option *ngFor="let f of gender" [value]="f">{{f}}</option>
                               </select> 
                               <label>Seat No</label>
-                              <input  type="number" class="form-control" formControlName="SeatNo"/>
+                              <input  type="text" class="form-control" formControlName="passengerSeatNo"/>
+                              <!-- <input type="text" class="form-control cdk-visually-hidden" value = "Y" formControlName="passengerIsActiceYn"/> -->
                             </div>
                             <br>
                             <div class="container-form-btn">

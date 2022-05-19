@@ -15,6 +15,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AirlineComponent implements OnInit {
 
+  AirlineName : string = '';
+  AirlineContactNo : number=0;
+  AirlineContactAddress :string='';          
+  AirlineIsActiveYN :string ='';
+
   constructor(private airline :AirlineService, private toast:ToastrService,
     private router:Router) { }
 
@@ -22,10 +27,10 @@ export class AirlineComponent implements OnInit {
     this.GetAllAirline();
   }
   displayedColumns: string[] = ['name','contact','address','status','action'];
-  dataSource!: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any>;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -39,14 +44,15 @@ export class AirlineComponent implements OnInit {
   GetAllAirline(){
       this.airline.GetAllAirlines()
     .subscribe({
-      next:(res:any)=>{
+      next:(res)=>{
+          
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         //console.log(res);
         //console.log(res[0].startDateTime);
       },
-      error:(err:any)=>
+      error:(err)=>
       {
         // alert("something went wrong");
         this.toast.error("Something went wrong")
@@ -55,15 +61,16 @@ export class AirlineComponent implements OnInit {
   }
 
   BlockAirline(id:number){
+    console.log(id);
      this.airline.BlockAirline(id)
     .subscribe({
-      next:(res:any)=>{
+      next:(res)=>{
         this.toast.error("Airline Blocked");
         // alert("Airline Blocked");
           this.GetAllAirline();
       },
       
-      error:(err:any)=>
+      error:(err)=>
       {
         this.toast.error("Something went wrong")
         // alert("something went wrong");
@@ -104,7 +111,7 @@ export class AirlineComponent implements OnInit {
 
   isUser(){
     //console.log(localStorage.getItem('isAdmin'));
-    if(localStorage.getItem('isAdmin')==="N")
+    if(localStorage.getItem('isAdmin')==="Y")
        return false;
     else   
        return true;

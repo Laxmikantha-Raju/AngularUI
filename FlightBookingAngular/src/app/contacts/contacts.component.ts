@@ -34,7 +34,7 @@ export class ContactsComponent implements OnInit {
 
   isUser(){
     //console.log(localStorage.getItem('isAdmin'));
-    if(localStorage.getItem('isAdmin')==="N")
+    if(localStorage.getItem('isAdmin')==="Y")
        return false;
     else   
        return true;

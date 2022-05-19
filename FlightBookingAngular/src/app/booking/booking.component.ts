@@ -14,11 +14,11 @@ import { ToastrService } from 'ngx-toastr';
 export class BookingComponent implements OnInit {
 
   
-  displayedColumns: string[] = ['PNR','FlightId','EmailId','TotalCost','NoOfSeats',
+  displayedColumns: string[] = ['PNR','FlightId','EmailId','NoOfSeats',
   'BookingStatus','action'];
   dataSource: MatTableDataSource<any>;
-  userFirstName: string;
-  userId:string;
+  userFirstName: string|null;
+  userId:string|null;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,8 +26,8 @@ export class BookingComponent implements OnInit {
     private flight:FlightsheduleService,
     private router:Router,
     private toast:ToastrService) {
-    this.userFirstName = (localStorage.getItem('userFirstName')!);
-    this.userId = (localStorage.getItem('userId')!);
+    this.userFirstName = localStorage.getItem('userFirstName');
+    this.userId = localStorage.getItem('userId');
    }
 
   ngOnInit(): void {
@@ -59,8 +59,9 @@ export class BookingComponent implements OnInit {
   }
 
   getBooking(){
-    
-    this.flight.GetAllBooking(this.userId)
+    console.log(localStorage.getItem('userFirstName'));
+   // this.flight.GetAllBooking(this.userFirstName)
+    this.flight.GetAllBooking()
     .subscribe({
       next:(res:any)=>{
         this.dataSource = new MatTableDataSource(res);

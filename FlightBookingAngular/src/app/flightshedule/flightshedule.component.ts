@@ -15,8 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FlightsheduleComponent implements OnInit {
 
-  displayedColumns: string[] = ['airlineId','fromPlace','toPlace','startDateTime','endDateTime','sheduledDay','instrumentUsed',
-  'totalNBCSeats','totalBCSeats','bcTicketCost','nBcTicketCost','mealType','action'];
+  displayedColumns: string[] = ['FlightAirlineNo','FlightFromPlace','FlightToPlace','FlightStartDateTime','FlightEndDateTime','FlighScheduleDays','FlightInstrumentUsed',
+  'FlightBusinessClassSeat','FlightEconomyClassSeat','FlightTicketCost','FlightMeal','action'];
   dataSource: MatTableDataSource<any>; 
 
   @ViewChild(MatPaginator) paginator: MatPaginator; 
@@ -67,7 +67,8 @@ export class FlightsheduleComponent implements OnInit {
   
 
   getAllFlights(){
-    this.flight.GetAllUnblockAirline()
+    //this.flight.GetAllUnblockAirline()
+    this.flight.GetAllFlights()
     .subscribe({
       next:(res)=>{
         console.log(res);

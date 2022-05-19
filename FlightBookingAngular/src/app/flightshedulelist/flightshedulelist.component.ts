@@ -38,44 +38,42 @@ export class FlightshedulelistComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editData : any
     ) { }
   gender=['Male','Female'];
-  date1!:Date; //check
-  date2!:Date; //check
-  str1!:string; //check
-  str2!:string; //check
+  date1:Date; 
+  date2:Date; 
+  str1:string; 
+  str2:string; 
   actionBtn:string ='save';
 
   ngOnInit(): void {
     this.flightForm = this.fb.group({
-      airlineId:['',Validators.required],
-      fromPlace:['',Validators.required],
-      toPlace:['',Validators.required],
-      startDateTime :['',Validators.required],
-      endDateTime:[''],
-      sheduledDay:[''],
-      instrumentUsed:['',Validators.required],
-      totalBCSeats:['',Validators.required],
-      totalNBCSeats:['',Validators.required],
-      bcTicketCost:['',Validators.required],
-      nBcTicketCost:['',Validators.required],
-      mealType:['',Validators.required]
+      flightNumber:['',Validators.required],
+      flightFromPlace:['',Validators.required],
+      flightToPlace:['',Validators.required],
+      flightStartDateTime :['',Validators.required],
+      flightEndDateTime:[''],
+      flighScheduleDays:[''],
+      flightInstrumentUsed:['',Validators.required],
+      flightBusinessClassSeat:['',Validators.required],
+      flightEconomyClassSeat:['',Validators.required],
+      flightTicketCost:['',Validators.required],
+      flightIsActiveYN:['',Validators.required]
     }),
     console.log(this.editData);
 
     if(this.editData!=null){
       console.log("yes");
       this.actionBtn ='update';
-      this.flightForm.controls['airlineId'].setValue(this.editData.airlineId);
-      this.flightForm.controls['fromPlace'].setValue(this.editData.fromPlace);
-      this.flightForm.controls['toPlace'].setValue(this.editData.toPlace);
-      this.flightForm.controls['sheduledDay'].setValue(this.editData.sheduledDay);
-      this.flightForm.controls['instrumentUsed'].setValue(this.editData.instrumentUsed);
-      this.flightForm.controls['totalBCSeats'].setValue(this.editData.totalBCSeats);
-      this.flightForm.controls['totalNBCSeats'].setValue(this.editData.totalNBCSeats);
-      this.flightForm.controls['bcTicketCost'].setValue(this.editData.bcTicketCost);
-      this.flightForm.controls['nBcTicketCost'].setValue(this.editData.nBcTicketCost);
-      this.flightForm.controls['startDateTime'].setValue(this.editData.startDateTime);
-      this.flightForm.controls['endDateTime'].setValue(this.editData.endDateTime);
-      this.flightForm.controls['mealType'].setValue(this.editData.mealType);
+      this.flightForm.controls['flightNumber'].setValue(this.editData.flightNumber);
+      this.flightForm.controls['flightFromPlace'].setValue(this.editData.flightFromPlace);
+      this.flightForm.controls['flightToPlace'].setValue(this.editData.flightToPlace);
+      this.flightForm.controls['flighScheduleDays'].setValue(this.editData.flighScheduleDays);
+      this.flightForm.controls['flightInstrumentUsed'].setValue(this.editData.flightInstrumentUsed);
+      this.flightForm.controls['flightBusinessClassSeat'].setValue(this.editData.flightBusinessClassSeat);
+      this.flightForm.controls['flightEconomyClassSeat'].setValue(this.editData.flightEconomyClassSeat);
+      this.flightForm.controls['flightTicketCost'].setValue(this.editData.flightTicketCost);
+      this.flightForm.controls['flightStartDateTime'].setValue(this.editData.flightStartDateTime);
+      this.flightForm.controls['flightEndDateTime'].setValue(this.editData.flightEndDateTime);
+      this.flightForm.controls['FlightIsActiveYN'].setValue(this.editData.FlightIsActiveYN);
     }
 
   }
@@ -85,10 +83,12 @@ export class FlightshedulelistComponent implements OnInit {
     console.log(this.editData);
     if(!this.editData){
     console.log(this.flightForm.value);
-    this.date1 = this.flightForm.get('startDateTime')?.value; //check
-    this.flightForm.get('startDateTime')?.setValue(this.date1.toISOString()); //check
-    this.date2 = this.flightForm.get('endDateTime')?.value; //check
-    this.flightForm.get('endDateTime')?.setValue(this.date2.toISOString()); //check
+    this.date1 = this.flightForm.get('flightStartDateTime')?.value; //check
+    // this.flightForm.get('flightStartDateTime')?.setValue(this.date1.toISOString()); //check
+    this.flightForm.get('flightStartDateTime')?.setValue(this.date1); //check
+    this.date2 = this.flightForm.get('flightEndDateTime')?.value; //check
+    //this.flightForm.get('flightEndDateTime')?.setValue(this.date2.toISOString()); //check
+    this.flightForm.get('flightEndDateTime')?.setValue(this.date2); //check
 
 
     if(this.flightForm.valid){

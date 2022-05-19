@@ -100,72 +100,72 @@
               </select>  
             </ng-container> -->
   
-            <ng-container matColumnDef="airlineId">
+            <ng-container matColumnDef="FlightAirlineNo">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Flight Id  </th>
-              <td mat-cell *matCellDef="let row"> {{row.airlineId}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightNumber}} </td>
             </ng-container>
         
             <!-- Progress Column -->
-            <ng-container matColumnDef="fromPlace">
+            <ng-container matColumnDef="FlightFromPlace">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> From Place </th>
-              <td mat-cell *matCellDef="let row"> {{row.fromPlace}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightFromPlace}} </td>
             </ng-container>
         
             <!-- Name Column -->
-            <ng-container matColumnDef="toPlace">
+            <ng-container matColumnDef="FlightToPlace">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>To Place </th>
-              <td mat-cell *matCellDef="let row"> {{row.toPlace}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightToPlace}} </td>
             </ng-container>
         
             <!-- Fruit Column -->
-            <ng-container matColumnDef="startDateTime">
+            <ng-container matColumnDef="FlightStartDateTime">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>Start Date </th>
-              <td mat-cell *matCellDef="let row"> {{row.startDateTime|date}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightStartDateTime|date}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="endDateTime">
+            <ng-container matColumnDef="FlightEndDateTime">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>End Date </th>
-              <td mat-cell *matCellDef="let row"> {{row.endDateTime|date}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightEndDateTime|date}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="sheduledDay">
+            <ng-container matColumnDef="FlighScheduleDays">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Sheduled Day </th>
-              <td mat-cell *matCellDef="let row"> {{row.sheduledDay}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flighScheduleDays}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="instrumentUsed">
+            <ng-container matColumnDef="FlightInstrumentUsed">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Instrument Type </th>
-              <td mat-cell *matCellDef="let row"> {{row.instrumentUsed}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightInstrumentUsed}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="totalBCSeats">
+            <ng-container matColumnDef="FlightBusinessClassSeat">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>BC Seats </th>
-              <td mat-cell *matCellDef="let row"> {{row.totalBCSeats}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightBusinessClassSeat}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="totalNBCSeats">
+            <ng-container matColumnDef="FlightEconomyClassSeat">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> N-BC Seats </th>
-              <td mat-cell *matCellDef="let row"> {{row.totalNBCSeats}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightEconomyClassSeat}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="bcTicketCost">
+            <ng-container matColumnDef="FlightTicketCost">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> B-Ticket Cost </th>
-              <td mat-cell *matCellDef="let row"> {{row.bcTicketCost| currency}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightTicketCost| currency}} </td>
             </ng-container>
   
-            <ng-container matColumnDef="nBcTicketCost">
+            <!-- <ng-container matColumnDef="nBcTicketCost">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> NB-Ticket Cost </th>
               <td mat-cell *matCellDef="let row"> {{row.nBcTicketCost| currency}} </td>
-            </ng-container>
+            </ng-container> -->
   
-            <ng-container matColumnDef="mealType">
+            <ng-container matColumnDef="FlightMeal">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header> Meal Type </th>
-              <td mat-cell *matCellDef="let row"> {{row.mealType}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.flightMeal}} </td>
             </ng-container>
   
             <ng-container  matColumnDef="action">
               <th style="font-size: medium;" mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
-              <td mat-cell *matCellDef="let row">
+              <td mat-cell *matCellDef="let row; let i = index">
                 
               <button mat-icon-button *ngIf="isAdmin()" (click)="editFlight(row)" color="primary">
                 <mat-icon>edit</mat-icon>

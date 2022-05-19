@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           next: (res: any) => {
             //console.log(res);
             localStorage.setItem('userToken', res.icToken.token);
-            localStorage.setItem('userFirstName', res.UserName);
+            localStorage.setItem('userFirstName', res.icTblUserDetails[0].userFirstName);
             localStorage.setItem('userId', res.icTblUserDetails[0].userId);
             localStorage.setItem('userEmailid', res.icTblUserDetails[0].userEmailid);
             localStorage.setItem('isAdmin', res.icTblUserDetails[0].userIsAdmin);

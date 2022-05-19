@@ -19,28 +19,32 @@ export class BookingDialogComponent implements OnInit {
   constructor(private router: Router,private fb:FormBuilder,private flight:FlightsheduleService,
     private toast:ToastrService) { }
 
-  classtype:Array<string>=['NB-Class','B-Class'];
+  classtype:Array<string>=['Eco Class','Bis-Class'];
   gender:Array<string>=['Male','Female'];
   discount!: Array<any>;  // check
+  mealtype:Array<string>=['Veg','Non Veg'];
 
   public PassengerList!:FormGroup; // check
   
   ngOnInit(): void {
 
-    this.getDiscount();
+    //this.getDiscount();
 
     this.bookForm = this.fb.group({
 
-      NoOfSeats:[''],
+      bookingNoOfSeatBook:[''],
+      bookingFlightNumber:[''],
       ClassType:[''],
+      BookingMeal:[''],
       JourneyType:[''],
-      EmailId:[localStorage.getItem('email')],
+      userEmailid:[localStorage.getItem('userEmailid')],
       FlightId:[Number(localStorage.getItem('FlightId'))],
-      UserId:[Number(localStorage.getItem('userId'))],
+      userFirstName:[Number(localStorage.getItem('userFirstName'))],
+      userId:[Number(localStorage.getItem('userId'))],
       DiscountId : [1],
       ReturnDate:[''],
       PNR:[''],
-      PassengerList: this.fb.array([])
+      tblPassengers: this.fb.array([])
 
     })
   }
@@ -49,15 +53,16 @@ export class BookingDialogComponent implements OnInit {
  
 
  get pass(){
-   return this.bookForm.controls["PassengerList"] as FormArray;
+   return this.bookForm.controls["tblPassengers"] as FormArray;
  }
 
  addPass(){
     const form = this.fb.group({
       PassengerName:[''],
-      Age:[''],
-      Gender:[''],
-      SeatNo:[''],
+      passengerAge:[''],
+      passengerGender:[''],
+      passengerSeatNo:[''],
+      PassengerIsActiceYn:['Y'],
     });
     this.pass.push(form);
  }
@@ -65,9 +70,22 @@ export class BookingDialogComponent implements OnInit {
  getFormGroup(control: AbstractControl) { return control as FormGroup; }
 
  submit(){
-     console.log(this.bookForm.value);
+     //console.log(this.bookForm.value);
     
-     this.flight.Bookticket(this.bookForm.value).
+     //this.flight.Bookticket(this.bookForm.value).
+     let BookingPassengerDetails = {
+      tblBookings:[{
+        BookingNoOfSeatBook:this.bookForm.value.bookingNoOfSeatBook,
+        BookingName:this.bookForm.value.userFirstName,
+        BookingEmailId: this.bookForm.value.userEmailid,
+        BookingIsActiceYn:'Y',
+        BookingMeal:this.bookForm.value.BookingMeal,
+        BookingFlightNumber:this.bookForm.value.bookingFlightNumber
+      }],
+      tblPassengers:this.bookForm.value.tblPassengers
+     };
+     console.log(BookingPassengerDetails);
+     this.flight.Bookticket(BookingPassengerDetails).
      subscribe({
        next:()=>{
          this.toast.success("Booking Completed");
@@ -105,20 +123,20 @@ export class BookingDialogComponent implements OnInit {
       this.pass.removeAt(id);
   }
 
-  getDiscount(){
-    this.flight.GetDiscountList().
-     subscribe({
-       next:(res)=>{
-         console.log(res);
-         this.discount = res;
-       },
-       error:()=>
-       {
-        this.toast.error("Some Error occured");
-       }
+  // getDiscount(){
+  //   this.flight.GetDiscountList().
+  //    subscribe({
+  //      next:(res)=>{
+  //        console.log(res);
+  //        this.discount = res;
+  //      },
+  //      error:()=>
+  //      {
+  //       this.toast.error("Some Error occured");
+  //      }
        
-     })
-  }
+  //    })
+  // }
 
   addReturnDate(){
     let elem: HTMLElement=(document.getElementById("date")!); // check
